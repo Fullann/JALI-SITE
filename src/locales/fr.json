@@ -1,0 +1,103 @@
+{
+    "landing" : {
+        "main" : "Bot Discord de Gestion",
+        "sub" : "Bot de gestion et d'amélioration de votre serveur Discord"
+    },
+    "notFound" : {
+        "main" : "Désolé, la page que vous recherchez n'a pas pu être trouvée",
+        "goHome" : "Go Home"
+    },
+    "dashboard" : {
+        "home" : "Home",
+        "welcome" : "Welcome",
+        "logs" : "View Logs",
+        "Balance" : "Solde",
+        "Dons" : "Dons",
+        "Récompenses" : "Récompenses",
+        "Achats" : "Achats",
+        "Vend" : "Sells",
+        "Titulaires" : "Holders",
+        "Prix" : "Prices",
+        "MarketCaps" : "Market Caps",
+        "Volumes" : "Volumes",
+        "creatorCoin" : "Creator Coin",
+        "Loading" : "Chargement",
+        "Period" : "Period",
+        "default" : "Default",
+        "Chart" : "Chart"
+    },
+    "deeplink":{
+        "Help" : "Need help ?",
+        "Home" : "Home",
+        "coinName" : "Nom de la pièce",
+        "currencyType" : "Type de monnaie",
+        "amount" : "Montant",
+        "memo" : "Memo",
+        "generatedLink" : "Generated link",
+        "link" : "link"
+
+    },
+    "setup" : {
+        "go" : "Let's go",
+        "channels" : "Configurer les canaux sur discord",
+        "roles" : "Configurer les rôles sur discord",
+        "permissions" : "Configurer les permissions sur discord",
+        "channelMappings" : "Channel Mappings",
+        "roleMappings" : "Role Mappings",
+        "Coin" : "Coin",
+        "Amount" : "Amount",
+        "Channel" : "Channel",
+        "role" : "Role",
+        "Actions" : "Actions",
+        "add" : "Add"
+    },
+    "Commandes" : {
+        "edit" : "Editer"
+    },
+    "featureRequest" : {
+        "title" : "Title",
+        "description" : "Description",
+        "descPlaceholder" : "Entrez un contenu long",
+        "onGithub" : "Ouvrir un problème sur Github",
+        "submit" : "Submit"
+    },
+    "logs" : {
+        "network" : "Réseau",
+        "refresh" : "Refresh"
+    },
+    "settings" : {
+        "general" : "Général",
+        "prefix" : "Préfixe",
+        "enable" :  "Enable",
+        "disable" : "Disable",
+        "currency" : "Currency",
+        "Reset" : "Reset"
+    },
+    "navbar" : {
+        "account" : "Compte",
+        "Paramètres" : "Paramètres",
+        "Logout" : "Logout",
+        "Messages" : "Messages",
+        "Avertissements" : "Avertissements",
+        "Erreurs" : "Erreurs",
+        "login" : "Login"
+    },
+    "sidebar" : {
+        "main" : "MAIN",
+        "dashboard" : "Dashboard",
+        "setup" : "Setup",
+        "Commandes" : "Commandes",
+        "featureRequest" : "Feature Request",
+        "misc" : "MISC",
+        "logs" : "Logs",
+        "controls" : "Contrôles",
+        "Settings" : "Paramètres",
+        "deeplink" : "Deeplink" 
+    },
+    "footer" : {
+        "conditions" : "Conditions de service",
+        "policy" : "Politique de confidentialité",
+        "about" : "About Us",
+        "love" : "Fait avec ❤️ par la communauté"
+    }
+}
