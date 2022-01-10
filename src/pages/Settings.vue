@@ -237,7 +237,7 @@ export default {
     },
     refresh(val) {
       if (!this.auth) return;
-
+      console.log(val)
       fetch(`${config.botApi}/mappings/prefix/${val}`, {
         headers: {
           authorization: this.token,

@@ -23,7 +23,7 @@
             </template>
             <template v-else>
               <img
-                alt="rally-logo"
+                alt="Jali-logo"
                 src="@/assets/icon.svg"
                 class="w-12 h-12 bg-gray-300 dark:bg-gray-900 rounded-full shadow-lg"
               />

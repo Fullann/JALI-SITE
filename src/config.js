@@ -9,7 +9,7 @@ export default {
     coingeckoApi: "https://api.coingecko.com/api/v3",
     discordApi: "https://discord.com/api",
     discordCdn: "https://cdn.discordapp.com",
-    githubHome: "https://github.com/CreatorCoinTools/rally-discordbot-dashboard",
+    githubHome: "https://github.com/Fullann/YUKI-JALI",
     colors: {
         default: "#344675",
         primary: "#42b883",
