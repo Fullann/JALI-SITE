@@ -130,7 +130,7 @@ export default {
   },
   data() {
     return {
-      defaultPrefix: "$",
+      defaultPrefix: "<",
       currentPrefix: "",
       botEnabled: true,
       currencies: [{ value: "usd", label: "USD" }],
@@ -211,22 +211,20 @@ export default {
         this.$toast.info("No guild has been selected");
         return;
       }
-
       fetch(
-        `${config.botApi}/mappings/prefix${queryString({
-          guildId: this.currentGuildId,
-        })}`,
+        `${config.botApi}/guilds/${this.currentGuildId}`,
         {
-          method: "post",
+          method: "PATCH",
           headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
             authorization: this.token,
           },
-          body: JSON.stringify({ prefix: this.defaultPrefix }),
+          body: JSON.stringify({settings: { guiPrefix: "*" }}),
         }
       )
         .then((res) => res.json())
         .then((response) => {
-          if (response.prefix) {
+          if (response.prefix) {  
             this.currentPrefix = response.prefix;
             this.botEnabled = true;
             this.$toast.success("All settings have been reset");
@@ -237,7 +235,6 @@ export default {
     },
     refresh(val) {
       if (!this.auth) return;
-      console.log(val)
       fetch(`${config.botApi}/mappings/prefix/${val}`, {
         headers: {
           authorization: this.token,

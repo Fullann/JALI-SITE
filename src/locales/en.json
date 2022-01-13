@@ -26,6 +26,14 @@
         "default": "Default",
         "chart": "Chart"
     },
+    "plugins": {
+        "commands": "Commands",
+        "plugins": "Plugins"
+    },
+    "command":{
+        "titel": "All commands available"
+    },
+
     "deeplink":{
         "Help" : "Need help?",
         "Home" : "Home",

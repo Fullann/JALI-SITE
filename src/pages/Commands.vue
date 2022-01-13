@@ -1,44 +1,22 @@
 <template>
   <div id="commands">
     <div class="flex justify-between">
-      <breadcrumbs :name="$t('sidebar.commands')" />
-
-      <div
-        v-if="auth"
-        class="relative inline-block w-12 mr-2 mt-2 align-middle select-none transition duration-200 ease-in"
-      >
-        <input
-          disabled
-          checked="true"
-          type="checkbox"
-          name="toggle"
-          id="toggle"
-          class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
-        />
-        <label
-          for="toggle"
-          class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
-        ></label>
-      </div>
+      <breadcrumbs :name="$t('plugins.plugins')" />
     </div>
-
-    <button
-      name="refresh"
-      @click="refresh"
-      class="bg-red-500 hover:bg-red-600 focus:outline-none rounded-lg px-6 py-2 text-white font-semibold shadow"
-    >
-      {{ $t("logs.refresh") }}
-    </button>
-
-    <template v-if="commands.length">
-      <Command
-        v-for="(command, idx) in commands"
-        :key="idx"
-        :id="idx.toString()"
-        :command="command.name"
-        :description="command.description"
-        :checked="true"
-      />
+  <div class="flex justify-center">
+    <p class="text-2xl mb-1">{{$t('command.titel')}}</p>
+  </div>
+    <template v-if="category.length">
+     <div v-for="commands in category"  :key="commands.category">
+        <p class="text-2xl mb-1 mt-4">{{commands.name}}</p>
+        <Command
+          v-for="(command, idx) in commands"
+          :key="idx"
+          :id="idx.toString()"
+          :command="command.name"
+          :description="command.description"
+        />
+     </div>
     </template>
     <template v-else><div class="w-full mt-8 px-3">Loading...</div></template>
   </div>
@@ -74,20 +52,27 @@ export default {
   },
   data() {
     return {
-      commands: [],
+      category: [],
     };
   },
   methods: {
     refresh() {
       this.$toast.info("Loading commands");
       fetch(`${config.botApi}/commands`)
-        .then((res) => res.json())
-        .then((response) => {
-          if (!response.length) return;
-          this.commands = response[0].name ? response : [];
-        })
-        .catch(() =>
-          this.$toast.console.warning(
+       .then(function(res) {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then((response) => {
+        Object.keys(response.MESSAGES.COMMANDS).forEach(cat => {
+          if(cat != "ADMIN" && cat != "SERVPERSO"){
+            this.category.push(response.MESSAGES.COMMANDS[cat])
+          }
+        })      
+      })
+      .catch(() =>
+          this.$toast.info(
             "Failed to get commands list. Are you offline?"
           )
         );

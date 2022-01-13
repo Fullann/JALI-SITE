@@ -85,7 +85,7 @@
               </button>
               
               <router-link
-                :to="{ path: 'feature' }"
+                :to="{ path: 'plugins' }"
                 class=" flex mt-6 px-8 py-4 rounded-full font-normal tracking-wide bg-gradient-to-b from-red-600 to-red-700 text-white outline-none focus:outline-none hover:shadow-lg hover:from-red-900 transition duration-200 ease-in-out"
               >
                <svg

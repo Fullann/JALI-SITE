@@ -1,6 +1,4 @@
 <template>
-  <!-- give the sidebar z-50 class so its higher than the navbar if you want to see the logo -->
-  <!-- you will need to add a little "X" button next to the logo in order to close it though -->
   <collapse-transition>
     <div
       class="w-2/3 md:w-1/3 shadow-lg lg:w-64 fixed md:top-0 md:left-12 h-screen lg:block bg-gray-100 dark:bg-gray-800 z-30"
