@@ -70,18 +70,6 @@ export default new Vuex.Store({
             state.currentGuild = null;
             state.currentGuildId = null;
         },
-        setCoins(state, coins) {
-            state.coins = coins;
-        },
-        setCurrentCoin(state, coinId) {
-            state.currentCoin = coinId;
-        },
-        setDefaultCoin(state, coin) {
-            state.defaultCoin = coin;
-        },
-        setCurrency(state, currency) {
-            state.currency = currency;
-        }
     },
     actions: {
         toggleSidebar({ commit }) {
@@ -140,39 +128,11 @@ export default new Vuex.Store({
                 })
                 .catch(() => console.log("Failed to get guilds list."));
         },
-        setCoins({ commit }) {
-            fetch(`${config.rallyApi}/creator_coins`)
-                .then((res) => res.json())
-                .then((response) => {
-                    commit('setCoins', response);
-                })
-                .catch(() => console.log("Failed to get coins"));
-        },
-        setDefaultCoin({ commit }, coin) {
-            localStorage.setItem('defaultCoin', JSON.stringify(coin));
-            commit('setDefaultCoin', coin);
-        },
-        getDefaultCoin({ commit }) {
-            const coin = localStorage.getItem('defaultCoin');
-            if (!coin)
-                return;
-            commit('setDefaultCoin', JSON.parse(coin));
-        },
         setPreferedTheme() {
             const theme = localStorage.getItem('preferedTheme');
             if (!theme)
                 return;
             this.state.dark = theme === 'dark';
         },
-        setCurrency({ commit }, currency) {
-            localStorage.setItem('currency', currency);
-            commit('setCurrency', currency);
-        },
-        getCurrency({ commit }) {
-            const currency = localStorage.getItem('currency');
-            if (!currency)
-                return;
-            commit('setCurrency', currency);
-        }
     }
 });

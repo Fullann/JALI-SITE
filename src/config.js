@@ -5,8 +5,6 @@ export default {
     home: `${window.location.origin}/`,
     clientId: CLIENT_ID || "",
     botApi: BOT_API || "",
-    rallyApi: "https://api.rally.io/v1",
-    coingeckoApi: "https://api.coingecko.com/api/v3",
     discordApi: "https://discord.com/api",
     discordCdn: "https://cdn.discordapp.com",
     githubHome: "https://github.com/Fullann/YUKI-JALI",

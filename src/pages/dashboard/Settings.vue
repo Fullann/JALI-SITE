@@ -117,7 +117,6 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import config from "@/config";
 import fetch from "@/utils/fetch";
 import queryString from "@/utils/queryString";
-import randomString from "@/utils/randomString";
 
 export default {
   name: "Settings",
@@ -155,7 +154,7 @@ export default {
             authorization: this.token,
           },
           body: JSON.stringify({
-            prefix: this.botEnabled ? this.defaultPrefix : randomString(),
+            prefix: this.defaultPrefix,
           }),
         }
       )

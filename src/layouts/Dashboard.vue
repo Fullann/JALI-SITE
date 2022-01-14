@@ -11,11 +11,9 @@
         <Navbar />
 
         <div class="min-h p-6 bg-gray-200 dark:bg-gray-900">
-          <fade-transition>
-            <keep-alive include="DashboardHome,Logs,Commands" :max="3">
-              <router-view />
-            </keep-alive>
-          </fade-transition>
+          <keep-alive include="DashboardHome,Logs,Commands" :max="3">
+            <router-view />
+          </keep-alive>
         </div>
 
         <Footer />
@@ -37,8 +35,6 @@ import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-import { FadeTransition } from "vue2-transitions";
-
 export default {
   name: "Dashboard",
   computed: {
@@ -48,12 +44,6 @@ export default {
     Sidebar,
     Navbar,
     Footer,
-    FadeTransition,
-  },
-  beforeMount() {
-    this.$store.dispatch("getDefaultCoin");
-    this.$store.dispatch("setCoins");
-    this.$store.dispatch("getCurrency");
-  },
+  }
 };
 </script>

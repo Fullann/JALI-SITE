@@ -1,18 +1,31 @@
 <template>
   <div class="sticky top-0 z-40">
     <div
-      class="w-full h-20 md:h-16 px-6 shadow-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-between"
+      class="
+        w-full
+        h-20
+        md:h-16
+        px-6
+        shadow-lg
+        bg-gray-100
+        dark:bg-gray-800
+        flex
+        items-center
+        justify-between
+      "
     >
       <!-- left navbar -->
       <div class="flex flex-row">
         <div class="flex">
           <!-- mobile hamburger -->
-          <div
-            class="text-gray-500 lg:hidden flex items-center mr-4"
-          >
+          <div class="text-gray-500 lg:hidden flex items-center mr-4">
             <button
               name="toggle-sidebar"
-              class="hover:text-red-500 hover:border-white focus:outline-none navbar-burger"
+              class="
+                hover:text-red-500 hover:border-white
+                focus:outline-none
+                navbar-burger
+              "
               @click="toggleSidebar()"
             >
               <svg
@@ -30,7 +43,7 @@
 
       <!-- right navbar -->
       <div class="flex items-center relative">
-        <LanguageSwitcher/>
+        <LanguageSwitcher />
         <button
           name="toggle-theme"
           class="rounded-md mr-3 hover:text-red-500 focus:outline-none"
@@ -93,54 +106,116 @@
         <a
           v-else
           :href="loginUrl"
-          class="text-lg font-medium hover:text-red-500 transition duration-150 ease-in-out"
+          class="
+            text-lg
+            font-medium
+            hover:text-red-500
+            transition
+            duration-150
+            ease-in-out
+          "
           >{{ $t("navbar.login") }}</a
         >
       </div>
     </div>
 
     <!-- notifications menu -->
-    <zoom-center-transition>
-      <div
-        class="absolute bg-white dark:bg-gray-700 shadow-xl text-gray-500 dark:text-gray-100 rounded-b-lg w-48 bottom-10 right-0 mr-6"
-        :class="notificationsOpen ? '' : 'hidden'"
-      >
-        <notifications />
-      </div>
-    </zoom-center-transition>
+    <div
+      class="
+        absolute
+        bg-white
+        dark:bg-gray-700
+        shadow-xl
+        text-gray-500
+        dark:text-gray-100
+        rounded-b-lg
+        w-48
+        bottom-10
+        right-0
+        mr-6
+      "
+      :class="notificationsOpen ? '' : 'hidden'"
+    >
+      <notifications />
+    </div>
     <!-- notifications menu end -->
 
     <!-- dropdown menu -->
-    <zoom-center-transition>
-      <div
-        class="absolute bg-white dark:bg-gray-700 mt-1 shadow-xl text-gray-500 dark:text-gray-100 rounded-lg w-48 bottom-10 right-0 mr-6"
-        :class="dropDownOpen ? '' : 'hidden'"
+    <div
+      class="
+        absolute
+        bg-white
+        dark:bg-gray-700
+        mt-1
+        shadow-xl
+        text-gray-500
+        dark:text-gray-100
+        rounded-lg
+        w-48
+        bottom-10
+        right-0
+        mr-6
+      "
+      :class="dropDownOpen ? '' : 'hidden'"
+    >
+      <a
+        href="#"
+        class="
+          block
+          px-4
+          py-2
+          text-sm
+          font-semibold
+          hover:bg-gray-100
+          dark:hover:bg-gray-800
+        "
       >
-        <a
-          href="#"
-          class="block px-4 py-2 text-sm font-semibold hover:bg-gray-100 dark:hover:bg-gray-800"
-        >
-          {{ username }}
-        </a>
-        <router-link
-          :to="{ path: 'settings' }"
-          class="block px-4 py-2 text-sm font-semibold hover:bg-gray-100 dark:hover:bg-gray-800"
-          >{{ $t("navbar.settings") }}</router-link
-        >
-        <router-link
-          :to="{ path: '/' }"
-          class="block px-4 py-2 text-sm font-semibold hover:bg-gray-100 dark:hover:bg-gray-800"
-          >{{ $t("dashboard.home") }}</router-link
-        >
-        <button
-          name="logout"
-          @click="logout()"
-          class="block w-full text-left px-4 py-2 text-sm font-semibold hover:bg-red-400 dark:hover:bg-red-400"
-        >
-          {{ $t("navbar.logout") }}
-        </button>
-      </div>
-    </zoom-center-transition>
+        {{ username }}
+      </a>
+      <router-link
+        :to="{ path: 'settings' }"
+        class="
+          block
+          px-4
+          py-2
+          text-sm
+          font-semibold
+          hover:bg-gray-100
+          dark:hover:bg-gray-800
+        "
+        >{{ $t("navbar.settings") }}</router-link
+      >
+      <router-link
+        :to="{ path: '/' }"
+        class="
+          block
+          px-4
+          py-2
+          text-sm
+          font-semibold
+          hover:bg-gray-100
+          dark:hover:bg-gray-800
+        "
+        >{{ $t("dashboard.home") }}</router-link
+      >
+      <button
+        name="logout"
+        @click="logout()"
+        class="
+          block
+          w-full
+          text-left
+          px-4
+          py-2
+          text-sm
+          font-semibold
+          hover:bg-red-400
+          dark:hover:bg-red-400
+        "
+      >
+        {{ $t("navbar.logout") }}
+      </button>
+    </div>
     <!-- dropdown menu end -->
   </div>
 </template>
@@ -149,21 +224,16 @@
 import { mapState, mapGetters } from "vuex";
 import config from "@/config";
 import queryString from "@/utils/queryString";
-import fetch from "@/utils/fetch";
-import coinData from "@/utils/coinData";
 
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
-
 import Notifications from "./Notifications";
-import { ZoomCenterTransition } from "vue2-transitions";
 
 export default {
   name: "Navbar",
   components: {
     Notifications,
-    ZoomCenterTransition,
-    LanguageSwitcher
+    LanguageSwitcher,
   },
   computed: {
     ...mapState([
@@ -171,8 +241,6 @@ export default {
       "dark",
       "user",
       "stateParam",
-      "coins",
-      "currentCoin",
       "currency",
     ]),
     ...mapGetters({ auth: "ifAuthenticated" }),
@@ -207,13 +275,7 @@ export default {
     return {
       dropDownOpen: false,
       notificationsOpen: false,
-      cdn: config.discordCdn,
-      viewCoin: true,
-      coinId: "rally-2",
-      coin: "$RLY",
-      icon: "",
-      price: "$0",
-      percentage: "",
+      cdn: config.discordCdn
     };
   },
   methods: {
@@ -235,66 +297,6 @@ export default {
       this.dropDownOpen = false;
       this.notificationsOpen = false;
       this.$store.dispatch("logout");
-    },
-    refreshRallyPrice() {
-      const endpoint = `simple/price`;
-      const chartParams = {
-        ids: this.coinId,
-        vs_currencies: this.currency,
-        include_24hr_change: true,
-      };
-      coinData(endpoint, chartParams, (res) => {
-        this.coin = "$RLY";
-        this.icon = "";
-        this.price = `$${res[this.coinId].usd.toFixed(3)}`;
-        this.percentage = res[this.coinId].usd_24h_change.toFixed(2).toString();
-      });
-    },
-    refreshCCPrice() {
-      this.coin = `$${this.coins[this.currentCoin].coinSymbol}`;
-      this.icon = this.coins[this.currentCoin].coinImagePath;
-      fetch(
-            `${config.rallyApi}/creator_coins/${
-              this.coins[this.currentCoin].coinSymbol
-            }/price`
-          )
-            .then((res) => res.json())
-            .then((response) => {
-              this.price = `$${parseFloat(response.priceInUSD).toFixed(3)}`;
-              this.percentage = "";
-            })
-            .catch(() =>
-              this.$toast.warning("Failed to get coin price. Are you offline?")
-            )
-      fetch(
-        `${config.botApi}/coins/${
-          this.coins[this.currentCoin].coinSymbol
-        }/price?include_24hr_change=true`
-      )
-        .then((res) => res.json())
-        .then((response) => {
-          if (response.usd_24h_change)
-            this.percentage = parseFloat(response.usd_24h_change)
-              .toFixed(2)
-              .toString();
-        });
-    },
-    switchToken() {
-      if (this.viewCoin) this.refreshRallyPrice();
-      else this.refreshCCPrice();
-      this.viewCoin = !this.viewCoin;
-    },
-  },
-  mounted() {
-    if (this.coins[this.currentCoin]) this.refreshCCPrice();
-    else this.refreshRallyPrice();
-    setInterval(() => {
-      if (!this.viewCoin) this.refreshRallyPrice();
-    }, 60000);
-  },
-  watch: {
-    currentCoin() {
-      if (this.coins[this.currentCoin]) this.refreshCCPrice();
     },
   },
 };

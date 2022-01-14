@@ -137,13 +137,9 @@
 </style>
 
 <script>
-import { SlideYUpTransition } from "vue2-transitions";
 
 export default {
   name: "Modal",
-  components: {
-    SlideYUpTransition,
-  },
   props: {
     show: Boolean,
     closeBtn: Boolean,
