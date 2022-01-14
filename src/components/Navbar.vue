@@ -30,6 +30,7 @@
 
       <!-- right navbar -->
       <div class="flex items-center relative">
+        <LanguageSwitcher/>
         <button
           name="toggle-theme"
           class="rounded-md mr-3 hover:text-red-500 focus:outline-none"
@@ -151,6 +152,9 @@ import queryString from "@/utils/queryString";
 import fetch from "@/utils/fetch";
 import coinData from "@/utils/coinData";
 
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+
+
 import Notifications from "./Notifications";
 import { ZoomCenterTransition } from "vue2-transitions";
 
@@ -159,6 +163,7 @@ export default {
   components: {
     Notifications,
     ZoomCenterTransition,
+    LanguageSwitcher
   },
   computed: {
     ...mapState([

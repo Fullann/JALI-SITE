@@ -1,14 +1,11 @@
 <template>
   <div id="commands">
-    <div class="flex justify-between">
-      <breadcrumbs :name="$t('plugins.plugins')" />
+    <div class="flex justify-center">
+      <p class="text-2xl mb-1">{{ $t("command.titel") }}</p>
     </div>
-  <div class="flex justify-center">
-    <p class="text-2xl mb-1">{{$t('command.titel')}}</p>
-  </div>
     <template v-if="category.length">
-     <div v-for="commands in category"  :key="commands.category">
-        <p class="text-2xl mb-1 mt-4">{{commands.name}}</p>
+      <div v-for="commands in category" :key="commands.category">
+        <p class="text-2xl mb-1 mt-4">{{ commands.name }}</p>
         <Command
           v-for="(command, idx) in commands"
           :key="idx"
@@ -16,7 +13,7 @@
           :command="command.name"
           :description="command.description"
         />
-     </div>
+      </div>
     </template>
     <template v-else><div class="w-full mt-8 px-3">Loading...</div></template>
   </div>
@@ -35,7 +32,6 @@
 <script>
 import { mapGetters } from "vuex";
 
-import Breadcrumbs from "@/components/Breadcrumbs";
 import Command from "@/components/Command";
 
 import config from "@/config";
@@ -44,7 +40,6 @@ import fetch from "@/utils/fetch";
 export default {
   name: "Commands",
   components: {
-    Breadcrumbs,
     Command,
   },
   computed: {
@@ -59,22 +54,20 @@ export default {
     refresh() {
       this.$toast.info("Loading commands");
       fetch(`${config.botApi}/commands`)
-       .then(function(res) {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .then((response) => {
-        Object.keys(response.MESSAGES.COMMANDS).forEach(cat => {
-          if(cat != "ADMIN" && cat != "SERVPERSO"){
-            this.category.push(response.MESSAGES.COMMANDS[cat])
+        .then(function (res) {
+          if (res.ok) {
+            return res.json();
           }
-        })      
-      })
-      .catch(() =>
-          this.$toast.info(
-            "Failed to get commands list. Are you offline?"
-          )
+        })
+        .then((response) => {
+          Object.keys(response.MESSAGES.COMMANDS).forEach((cat) => {
+            if (cat != "ADMIN" && cat != "SERVPERSO") {
+              this.category.push(response.MESSAGES.COMMANDS[cat]);
+            }
+          });
+        })
+        .catch(() =>
+          this.$toast.info("Failed to get commands list. Are you offline?")
         );
     },
   },
