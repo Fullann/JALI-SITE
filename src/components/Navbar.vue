@@ -77,25 +77,6 @@
             </svg>
           </template>
         </button>
-        <button
-          name="toggle-notifications"
-          class="rounded-md mr-3 hover:text-red-500 focus:outline-none"
-          @click="toggleNotifications()"
-          aria-label="Toggle Notifications"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24"
-            viewBox="0 0 24 24"
-            width="24"
-            class="fill-current"
-          >
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path
-              d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"
-            />
-          </svg>
-        </button>
         <img
           v-if="auth"
           :src="avatar"
@@ -118,27 +99,6 @@
         >
       </div>
     </div>
-
-    <!-- notifications menu -->
-    <div
-      class="
-        absolute
-        bg-white
-        dark:bg-gray-700
-        shadow-xl
-        text-gray-500
-        dark:text-gray-100
-        rounded-b-lg
-        w-48
-        bottom-10
-        right-0
-        mr-6
-      "
-      :class="notificationsOpen ? '' : 'hidden'"
-    >
-      <notifications />
-    </div>
-    <!-- notifications menu end -->
 
     <!-- dropdown menu -->
     <div
@@ -227,12 +187,10 @@ import queryString from "@/utils/queryString";
 
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
-import Notifications from "./Notifications";
 
 export default {
   name: "Navbar",
   components: {
-    Notifications,
     LanguageSwitcher,
   },
   computed: {
@@ -241,7 +199,6 @@ export default {
       "dark",
       "user",
       "stateParam",
-      "currency",
     ]),
     ...mapGetters({ auth: "ifAuthenticated" }),
     state() {
@@ -282,10 +239,6 @@ export default {
     toggleDropDown() {
       this.notificationsOpen = false;
       this.dropDownOpen = !this.dropDownOpen;
-    },
-    toggleNotifications() {
-      this.dropDownOpen = false;
-      this.notificationsOpen = !this.notificationsOpen;
     },
     toggleSidebar() {
       this.$store.dispatch("toggleSidebar");
