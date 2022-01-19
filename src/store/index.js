@@ -58,8 +58,8 @@ export default new Vuex.Store({
         setGuilds(state, guilds) {
             state.guilds = guilds;
         },
-        setGuildsJoined(state, guildId) {
-            state.currentGuildId = guildId;
+        setGuildsJoined(state, guild) {
+            state.guildsJoined.push(guild);
         },
         setCurrentGuild(state, { guildIdx, guildId }) {
             state.currentGuild = guildIdx;
@@ -112,7 +112,6 @@ export default new Vuex.Store({
             })
                 .then((res) => res.json())
                 .then((response) => {
-                    console.log(response)
                     if (response.code === 0) {
                         const loginParams = {
                             client_id: config.clientId,
@@ -126,22 +125,14 @@ export default new Vuex.Store({
                     }
                     //check if owner or admin
                     commit('setGuilds', response.filter(guild => guild.owner || (guild.permissions & 0x8) === 0x8));
+
                     state.guilds.forEach(guild => {
-                        fetch(`${config.botApi}/guild/${guild.id}`,
-                            {
-                                method: "PATCH",
-                                headers: {
-                                    'Content-Type': 'application/json; charset=UTF-8',
-                                    authorization: this.token,
-                                },
-                                body: JSON.stringify({ settings: { guiID: this.currentGuildId } }),
-                            }
-                        )
+                        fetch(`${config.botApi}/guild/${guild.id}`)
                             .then((res) => res.json())
                             .then((response) => {
-                                if(response){
-                                    console.log(response)
-                                    commit(' setGuildsJoined', response);
+                                if (!response.error) {
+                                    commit('setGuildsJoined',{...response, ...guild});
+                                    commit('setGuilds', state.guilds.filter(g => g.id !== guild.id));
                                 }
                             })
                             .catch(() =>

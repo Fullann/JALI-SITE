@@ -6,11 +6,30 @@
         id="main-content"
       >
         <Header />
+        <div class="flex justify-center">
+          <div class="min-h p-6 w-5/6 bg-gray-200 dark:bg-gray-900">
+            <h1 class="text-center text-2xl">{{ $t("guilds.titel") }}</h1>
 
-        <div class="min-h p-6 flex justify-center bg-gray-200 dark:bg-gray-900">
-          <h1 class="text-2xl">{{ $t("guilds.titel") }}</h1>
+            <h1 class="text-left text-2xl">{{ $t("guilds.titelConfigure") }}</h1>
+            <div class="block md:flex content-center">
+              <Guild
+                v-for="(guild, idx) in guildsJoined"
+                :key="idx"
+                :guild="guild"
+                :isJoined="false"
+              />
+            </div>
+            <h1 class="text-left text-2xl">{{ $t("guilds.titelAdd") }}</h1>
+            <div class="block md:flex content-center">
+              <Guild
+                v-for="(guild, idx) in guilds"
+                :key="idx"
+                :guild="guild"
+                :isJoined="true"
+              />
+            </div>
+          </div>
         </div>
-
         <Footer />
       </div>
     </div>
@@ -24,15 +43,18 @@ import config from "@/config";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
+import Guild from "@/components/Guild";
+
 export default {
   name: "Guilds",
   components: {
     Header,
     Footer,
+    Guild,
   },
   computed: {
     ...mapGetters({ auth: "ifAuthenticated" }),
-    ...mapState(["user", "stateParam"]),
+    ...mapState(["user", "token", "stateParam", "guildsJoined", "guilds"]),
     state() {
       return btoa(this.stateParam);
     },
@@ -43,7 +65,9 @@ export default {
     };
   },
   beforeMount() {
-    if (this.auth) this.$store.dispatch("setGuilds", this.token);
+    if (this.auth) {
+      this.$store.dispatch("setGuilds", this.token);
+    }
   },
 };
 </script>
