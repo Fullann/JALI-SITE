@@ -35,7 +35,7 @@
           <template v-if="currentGuild !== null">
             <img
               alt="guild-icon"
-              :src="`${cdn}/icons/${guilds[currentGuild].id}/${guilds[currentGuild].icon}.png`"
+              :src="`${cdn}/icons/${guildsJoined[currentGuild].id}/${guildsJoined[currentGuild].icon}.png`"
               class="
                 w-12
                 h-12
@@ -45,7 +45,7 @@
                 shadow-lg
               "
             />
-            <p class="font-semibold pl-4">{{ guilds[currentGuild].name }}</p>
+            <p class="font-semibold pl-4">{{ guildsJoined[currentGuild].name }}</p>
           </template>
           <template v-else>
             <img
@@ -461,7 +461,7 @@ export default {
     Guilds,
   },
   computed: {
-    ...mapState(["sideBarOpen", "currentGuild", "guilds"]),
+    ...mapState(["sideBarOpen", "currentGuild", "guildsJoined"]),
     ...mapGetters({ auth: "ifAuthenticated" }),
   },
   data() {

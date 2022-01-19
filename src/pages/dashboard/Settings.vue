@@ -85,22 +85,11 @@ export default {
     },
     refresh() {
       if (!this.auth) return;
-      fetch(`${config.botApi}/guild/${this.currentGuildId}`,
-        {
-          method: "PATCH",
-          headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
-            "Access-Control-Allow-Headers":"*",
-            authorization: this.token,
-          },
-          body: JSON.stringify({settings: { guiID: this.currentGuildId }}),
-        }
-      )
+      fetch(`${config.botApi}/guild/${this.currentGuildId}`)
         .then((res) => res.json())
         .then((response) => {
-          console.log(response)
-          if (response.prefix) {
-            this.currentPrefix = response.prefix;
+          if (response.guiPrefix) {
+            this.currentPrefix = response.guiPrefix;
             this.botEnabled = this.currentPrefix.length < 15 ? true : false;
             this.$toast.info("Settings refreshed");
           } else

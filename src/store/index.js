@@ -124,15 +124,15 @@ export default new Vuex.Store({
                         return;
                     }
                     //check if owner or admin
-                    commit('setGuilds', response.filter(guild => guild.owner || (guild.permissions & 0x8) === 0x8));
+                    let arr = response.filter(guild => guild.owner || (guild.permissions & 0x8) === 0x8);
 
-                    state.guilds.forEach(guild => {
+                    arr.forEach(guild => {
                         fetch(`${config.botApi}/guild/${guild.id}`)
                             .then((res) => res.json())
                             .then((response) => {
                                 if (!response.error) {
                                     commit('setGuildsJoined',{...response, ...guild});
-                                    commit('setGuilds', state.guilds.filter(g => g.id !== guild.id));
+                                    commit('setGuilds', arr.filter(g => g.id !== guild.id));
                                 }
                             })
                             .catch(() =>

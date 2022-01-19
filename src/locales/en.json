@@ -73,7 +73,13 @@
         "add": "Add",
         "configure": "Configure"
     },
-
+    "dashboard":{
+        "home": "Home"
+    },
+    "settings":{
+        "general": "General",
+        "prefix": "Prefix"
+    },
     "footer": {
         "terms": "Terms of Service",
         "policy": "Privacy Policy",

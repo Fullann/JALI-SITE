@@ -24,7 +24,7 @@
 
     <div v-if="auth">
       <img
-        v-for="(guild, index) in guilds"
+        v-for="(guild, index) in guildsJoined"
         :key="guild.id"
         :src="`${cdn}/icons/${guild.id}/${guild.icon}.png`"
         alt="guild-icon"
@@ -75,7 +75,7 @@ import config from "@/config";
 export default {
   name: "Guilds",
   computed: {
-    ...mapState(["user", "token", "guilds", "currentGuild"]),
+    ...mapState(["user", "token", "guildsJoined", "currentGuild"]),
     ...mapGetters({ auth: "ifAuthenticated" }),
     avatar() {
       return this.user
@@ -93,7 +93,7 @@ export default {
     setGuild(guildIdx) {
       this.$store.commit("setCurrentGuild", {
         guildIdx,
-        guildId: this.guilds[guildIdx].id,
+        guildId: this.guildsJoined[guildIdx].id,
       });
     },
   },

@@ -10,8 +10,8 @@
           <div class="min-h p-6 w-5/6 bg-gray-200 dark:bg-gray-900">
             <h1 class="text-center text-2xl">{{ $t("guilds.titel") }}</h1>
 
-            <h1 class="text-left text-2xl">{{ $t("guilds.titelConfigure") }}</h1>
-            <div class="block md:flex content-center">
+            <h1 v-if="guildsJoined" class="text-left text-2xl">{{ $t("guilds.titelConfigure") }}</h1>
+            <div class="block w-full lg:flex content-center">
               <Guild
                 v-for="(guild, idx) in guildsJoined"
                 :key="idx"
@@ -19,8 +19,8 @@
                 :isJoined="false"
               />
             </div>
-            <h1 class="text-left text-2xl">{{ $t("guilds.titelAdd") }}</h1>
-            <div class="block md:flex content-center">
+            <h1 v-if="guilds" class="text-left text-2xl">{{ $t("guilds.titelAdd") }}</h1>
+            <div class="block lg:flex content-center">
               <Guild
                 v-for="(guild, idx) in guilds"
                 :key="idx"

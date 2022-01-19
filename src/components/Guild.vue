@@ -1,12 +1,9 @@
 <template>
-  <div class="m-5 w-7/12">
+  <div class="m-5 w-full lg:w-4/12">
     <div
       class="
         shadow-lg shadow-purple-200
         p-4
-        w-full
-        md:w-96
-        h-52
         rounded
         bg-gradient-to-bl
         from-purple-300
