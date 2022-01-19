@@ -13,12 +13,9 @@ export default new Vuex.Store({
         userId: null,
         user: null,
         guilds: [],
+        guildsJoined: [],
         currentGuild: null,
         currentGuildId: null,
-        coins: [],
-        defaultCoin: null,
-        currentCoin: 0,
-        currency: 'usd',
         stateParam: null,
         sideBarOpen: false,
         dark: true,
@@ -60,6 +57,9 @@ export default new Vuex.Store({
         },
         setGuilds(state, guilds) {
             state.guilds = guilds;
+        },
+        setGuildsJoined(state, guildId) {
+            state.currentGuildId = guildId;
         },
         setCurrentGuild(state, { guildIdx, guildId }) {
             state.currentGuild = guildIdx;
@@ -106,16 +106,17 @@ export default new Vuex.Store({
         },
         setGuilds({ commit, state }, token) {
             fetch(`${config.discordApi}/users/@me/guilds`, {
-                    headers: {
-                        authorization: token,
-                    },
-                })
+                headers: {
+                    authorization: token,
+                },
+            })
                 .then((res) => res.json())
                 .then((response) => {
+                    console.log(response)
                     if (response.code === 0) {
                         const loginParams = {
                             client_id: config.clientId,
-                            redirect_uri: `${config.home}dashboard/home`,
+                            redirect_uri: `${config.home}`,
                             response_type: "token",
                             scope: "identify guilds",
                             state: btoa(state.stateParam),
@@ -125,6 +126,28 @@ export default new Vuex.Store({
                     }
                     //check if owner or admin
                     commit('setGuilds', response.filter(guild => guild.owner || (guild.permissions & 0x8) === 0x8));
+                    state.guilds.forEach(guild => {
+                        fetch(`${config.botApi}/guild/${guild.id}`,
+                            {
+                                method: "PATCH",
+                                headers: {
+                                    'Content-Type': 'application/json; charset=UTF-8',
+                                    authorization: this.token,
+                                },
+                                body: JSON.stringify({ settings: { guiID: this.currentGuildId } }),
+                            }
+                        )
+                            .then((res) => res.json())
+                            .then((response) => {
+                                if(response){
+                                    console.log(response)
+                                    commit(' setGuildsJoined', response);
+                                }
+                            })
+                            .catch(() =>
+                                this.$toast.warning("Failed to refresh. Are you offline?")
+                            );
+                    })
                 })
                 .catch(() => console.log("Failed to get guilds list."));
         },

@@ -44,7 +44,7 @@
                 >{{ $t("navbar.login") }}</a
               >
               <router-link v-if="auth"
-                :to="{ path: 'dashboard' }"
+                :to="{ path: 'guilds' }"
                 class="px-6 py-3 rounded-3xl font-medium bg-gradient-to-b from-red-600 to-red-700 hover:from-red-900 text-white outline-none focus:outline-none hover:shadow-md hover:from-true-gray-900 transition duration-200 ease-in-out"
               >
                 {{ $t("sidebar.dashboard") }}

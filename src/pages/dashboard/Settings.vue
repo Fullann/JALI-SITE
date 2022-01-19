@@ -11,7 +11,7 @@
           }}</span>
           <input
             class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-            placeholder="$"
+            placeholder="<"
             v-model="currentPrefix"
             @change="onPrefixChange"
           />
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import {mapState, mapGetters } from "vuex";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 import config from "@/config";
@@ -37,6 +37,7 @@ export default {
   },
   computed: {
     ...mapGetters({ auth: "ifAuthenticated" }),
+    ...mapState(["currentGuildId", "token"]),
   },
   data() {
     return {
@@ -47,6 +48,8 @@ export default {
   },
   methods: {
     onPrefixChange() {
+    console.log(this.currentGuildId)
+
       //change prefix endpoint
       if (!this.currentGuildId || !this.auth) {
         this.$toast.info("No guild has been selected");
@@ -80,13 +83,14 @@ export default {
           this.$toast.warning("Failed to change prefix. Are you offline?")
         );
     },
-    refresh(val) {
+    refresh() {
       if (!this.auth) return;
-      fetch(`${config.botApi}/guilds/${this.currentGuildId}`,
+      fetch(`${config.botApi}/guild/${this.currentGuildId}`,
         {
           method: "PATCH",
           headers: {
             'Content-Type': 'application/json; charset=UTF-8',
+            "Access-Control-Allow-Headers":"*",
             authorization: this.token,
           },
           body: JSON.stringify({settings: { guiID: this.currentGuildId }}),
@@ -94,6 +98,7 @@ export default {
       )
         .then((res) => res.json())
         .then((response) => {
+          console.log(response)
           if (response.prefix) {
             this.currentPrefix = response.prefix;
             this.botEnabled = this.currentPrefix.length < 15 ? true : false;
@@ -105,20 +110,6 @@ export default {
           this.$toast.warning("Failed to refresh. Are you offline?")
         );
 
-      fetch(`${config.botApi}/mappings/coin/${val}`, {
-        headers: {
-          authorization: this.token,
-        },
-      })
-        .then((res) => res.json())
-        .then((response) => {
-          if (response.coinKind) {
-            this.$refs.coins.value = response.coinKind;
-          }
-        })
-        .catch(() =>
-          this.$toast.warning("Failed to refresh. Are you offline?")
-        );
     },
   },
   watch: {
