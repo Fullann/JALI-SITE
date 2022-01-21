@@ -1,1 +1,5 @@
 # YUKI-JALI
+
+# Setup 
+VUE_APP_CLIENT_ID="id_bot"
+VUE_APP_BOT_API="http://localhost:3000"
